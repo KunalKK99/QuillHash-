@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import TodoContextProvider from "./components/todo";
 
-function App() {
+import Login from "./components/Auth/login";
+import AuthContextProvider from "./components/Auth/auth";
+import {BrowserRouter, Route} from "react-router-dom";
+import All from "./components/TodoWork/allinone";
+
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <TodoContextProvider>
+          <AuthContextProvider>
+              <Route exact path ='/' component={Login} />
+            <Route path ='/all' component={All} />
+          </AuthContextProvider>
+        </TodoContextProvider>
+      </BrowserRouter>
     </div>
   );
 }
